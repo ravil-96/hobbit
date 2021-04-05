@@ -1,0 +1,478 @@
+/* Reset styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* General styling */
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+h1,
+button {
+    font-family: "Raleway", sans-serif;
+    color: hsl(243, 87%, 12%);
+}
+
+p {
+    color: hsl(243, 87%, 12%);
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 3px;
+}
+
+a {
+    color: white;
+}
+
+.primary-button {
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        rgb(245, 210, 112),
+        hsl(12, 83%, 70%)
+    );
+    color: white;
+    font-weight: bold;
+}
+
+.primary-button:hover {
+    background: linear-gradient(
+        to right,
+        rgba(245, 210, 112, 0.7),
+        hsla(12, 83%, 70%, 0.7)
+    );
+}
+
+@media (max-width: 750px) {
+    h1,
+    h2,
+    p {
+        text-align: center;
+    }
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+}
+
+header img {
+    width: 10%;
+}
+
+.header-buttons {
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 3%;
+}
+
+header button {
+    background-color: transparent;
+    width: max-content;
+    flex: 1 0 auto;
+    margin: 0 2%;
+    padding: 1% 8%;
+    font-size: 1.2rem;
+}
+
+header button:hover {
+    font-weight: 600;
+}
+
+@media (max-width: 1250px) {
+    header img {
+        width: 130px;
+    }
+
+    header button {
+        padding: 1px 5px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 500px) {
+    header img {
+        width: 90px;
+    }
+    header button {
+        font-size: 1rem;
+    }
+}
+
+/* Sections styling */
+section {
+    padding: 3%;
+    display: flex;
+}
+
+section > * {
+    flex: 10;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.info p {
+    font-size: 1.2rem;
+    padding-right: 3%;
+}
+
+@media (max-width: 1250px) {
+    section {
+        flex-direction: column-reverse;
+    }
+
+    section img:nth-child(2) {
+        width: 85%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 375px) {
+    section h1 {
+        font-size: 26px;
+    }
+}
+
+/* Section 1 styling */
+.section-1 h1 {
+    font-size: 8rem;
+    color: #f76374;
+    text-shadow: 2px 2px 5px #c0bfbf;
+}
+
+.section-1 p {
+    font-size: 1.8rem;
+}
+
+.section-1 button {
+    flex: 1;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    width: 50%;
+}
+
+.section-1 img {
+    width: 65%;
+}
+
+@media (max-width: 1250px) {
+    .section-1 h1 {
+        padding-top: 1rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-1 button {
+        width: 50%;
+        margin: 0;
+    }
+
+    .section-1 button {
+        margin-top: 5%;
+        padding: 15px 0;
+        font-size: 1.5rem;
+    }
+
+    .section-1 .info {
+        display: flex;
+        text-align: center;
+    }
+}
+
+@media (max-width: 750px) {
+    .section-1 h1 {
+        font-size: 4.5rem;
+        padding-top: 1rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-1 button {
+        width: 50%;
+        margin-top: 5%;
+        padding: 15px 0;
+        font-size: 1.2rem;
+    }
+
+    .section-1 p {
+        font-size: 1.2rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .section-1 .info {
+        display: flex;
+        text-align: center;
+    }
+}
+
+/* Section 2 styling */
+.section-2 {
+    background-color: #f8f8fd;
+}
+
+.section-2 h2 {
+    text-align: left;
+    font-size: 2.5rem;
+}
+
+.section-2 img {
+    width: 50%;
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+}
+
+.mobile-active {
+    display: none;
+}
+
+.desktop-active {
+    width: 100%;
+    position: relative;
+    top: 20px;
+}
+
+@media (max-width: 1250px) {
+    .section-2 h2 {
+        text-align: center;
+    }
+
+    .section-2 p {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .section-2 img {
+        width: 75%;
+        align-self: center;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .section-2 h2 {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .desktop-active {
+        display: none;
+    }
+
+    .mobile-active {
+        display: unset;
+        width: 100%;
+        position: relative;
+        top: 20px;
+    }
+
+    .section-2 p {
+        text-align: center;
+        font-size: 1rem;
+    }
+}
+
+/* Section 3 styling */
+.section-3 {
+    background-color: #f7e0d5;
+}
+
+.section-3 h2 {
+    color: black;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.stars {
+    padding-left: 1.5rem;
+}
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+}
+
+.row {
+    margin: 0 -5px;
+    margin: 2rem 0rem;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 30px 5px;
+    text-align: center;
+    background-color: white;
+}
+
+@media (max-width: 1250px) {
+    .stars {
+        font-size: 0.8rem;
+    }
+
+    .section-3 p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .section-3 .info {
+        text-align: center;
+    }
+
+    .section-3 h2 {
+        font-size: 1.8rem;
+        padding-top: 1rem;
+    }
+
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+/* Footer styling */
+footer {
+    padding: 5% 5% 3% 3%;
+    background-color: #f66374;
+    display: flex;
+    flex-direction: column;
+}
+
+i {
+    padding-right: 1rem;
+}
+
+.extra-info {
+    flex: 5;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+}
+
+.extra-info p {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.contact p {
+    flex: 10;
+    margin: 0;
+}
+
+.about-hobbit li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.logos {
+    display: flex;
+    align-items: flex-start;
+}
+
+.logos li {
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logos li > * {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 750px) {
+    footer {
+        padding-top: 30px;
+        padding-left: 30px;
+    }
+
+    .extra-info {
+        flex-wrap: wrap;
+    }
+
+    .logos {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 550px) {
+    .extra-info {
+        flex-direction: column;
+        align-self: center;
+        text-align: center;
+        padding-bottom: 2rem;
+    }
+
+    .contacts {
+        padding-bottom: 2rem;
+    }
+
+    .contact {
+        align-self: center;
+    }
+
+    .about-hobbit {
+        margin: 0 auto;
+    }
+
+    .logos {
+        margin: 1rem;
+    }
+}
