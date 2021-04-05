@@ -191,3 +191,68 @@ header button:hover {
         text-align: center;
     }
 }
+
+/* Section 2 styling */
+.section-2 {
+    background-color: #f8f8fd;
+}
+
+.section-2 h2 {
+    text-align: left;
+    font-size: 2.5rem;
+}
+
+.section-2 img {
+    width: 50%;
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+}
+
+.mobile-active {
+    display: none;
+}
+
+.desktop-active {
+    width: 100%;
+    position: relative;
+    top: 20px;
+}
+
+@media (max-width: 1250px) {
+    .section-2 h2 {
+        text-align: center;
+    }
+
+    .section-2 p {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .section-2 img {
+        width: 75%;
+        align-self: center;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .section-2 h2 {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .desktop-active {
+        display: none;
+    }
+
+    .mobile-active {
+        display: unset;
+        width: 100%;
+        position: relative;
+        top: 20px;
+    }
+
+    .section-2 p {
+        text-align: center;
+        font-size: 1rem;
+    }
+}
