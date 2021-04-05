@@ -127,6 +127,44 @@ header button:hover {
     }
 }
 
+/* Sections styling */
+section {
+    padding: 3%;
+    display: flex;
+}
+
+section > * {
+    flex: 10;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.info p {
+    font-size: 1.2rem;
+    padding-right: 3%;
+}
+
+@media (max-width: 1250px) {
+    section {
+        flex-direction: column-reverse;
+    }
+
+    section img:nth-child(2) {
+        width: 85%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 375px) {
+    section h1 {
+        font-size: 26px;
+    }
+}
+
 /* Section 1 styling */
 .section-1 h1 {
     font-size: 8rem;
