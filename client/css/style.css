@@ -5,8 +5,17 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 button {
     cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
 }
 
 /* General styling */
@@ -28,6 +37,10 @@ p {
 button {
     border: none;
     border-radius: 3px;
+}
+
+a {
+    color: white;
 }
 
 .primary-button {
