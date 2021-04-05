@@ -36,3 +36,6 @@ services:
       - POSTGRES_PASSWORD=password
 volumes:
   dbdata:
+networks: 
+  default:
+    name: hobbit_api
