@@ -1,50 +1,103 @@
 /* Reset styles */
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 /* General styling */
 body {
-  font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 h1,
 button {
-  font-family: "Raleway", sans-serif;
-  color: hsl(243, 87%, 12%);
+    font-family: "Raleway", sans-serif;
+    color: hsl(243, 87%, 12%);
 }
 
 p {
-  color: hsl(243, 87%, 12%);
-  margin-top: 20px;
+    color: hsl(243, 87%, 12%);
+    margin-top: 20px;
 }
 
 button {
-  border: none;
-  border-radius: 3px;
+    border: none;
+    border-radius: 3px;
 }
 
 .primary-button {
-  color: white;
-  padding: 12px 30px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(
-      to right,
-      rgb(245, 210, 112),
-      hsl(12, 83%, 70%)
-  );
-  color: white;
-  font-weight: bold;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        rgb(245, 210, 112),
+        hsl(12, 83%, 70%)
+    );
+    color: white;
+    font-weight: bold;
 }
 
 .primary-button:hover {
-  background: linear-gradient(
-      to right,
-      rgba(245, 210, 112, 0.7),
-      hsla(12, 83%, 70%, 0.7)
-  );
+    background: linear-gradient(
+        to right,
+        rgba(245, 210, 112, 0.7),
+        hsla(12, 83%, 70%, 0.7)
+    );
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+}
+
+header img {
+    width: 10%;
+}
+
+.header-buttons {
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 3%;
+}
+
+header button {
+    background-color: transparent;
+    width: max-content;
+    flex: 1 0 auto;
+    margin: 0 2%;
+    padding: 1% 8%;
+    font-size: 1.2rem;
+}
+
+header button:hover {
+    font-weight: 600;
+}
+
+@media (max-width: 1250px) {
+    header img {
+        width: 130px;
+    }
+
+    header button {
+        padding: 1px 5px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 500px) {
+    header img {
+        width: 90px;
+    }
+    header button {
+        font-size: 1rem;
+    }
 }
