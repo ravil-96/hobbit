@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --legacy-watch index.js",
-    "testSeed": "node dbConfig/testSeed.js",
+    "seedDev": "node dbConfig/seedDev.js",
     "test": "jest --setupFiles ./tests/integration/config.js --watchAll --detectOpenHandles --runInBand --verbose",
     "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
     "coverage": "jest --testPathPattern=/unit/ --coverage"
@@ -27,7 +27,10 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pg": "^8.3.3"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.3.3",
+    "sql-template-strings": "^2.2.2"
   }
 }
