@@ -1,3 +1,5 @@
+const { getAllHabbits } = require('./requests')
+
 async function renderHabits() {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
@@ -50,3 +52,5 @@ async function renderHabits() {
   userHabits.forEach(allHabits);
   feed.appendChild(habits);
 }
+
+module.exports = {renderHabits};

@@ -30,3 +30,5 @@ async function getAllHabbits(){
         console.warn(err);
     }
 }
+
+module.exports = { getAllHabbits, postHabit }

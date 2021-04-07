@@ -1,4 +1,5 @@
 const jwt_decode = require('jwt-decode');
+const { renderHabits } = require('./habits');
 
 async function requestLogin(e){
     e.preventDefault();
@@ -41,9 +42,14 @@ async function requestRegistration(e) {
 function login(token){
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
-    localStorage.setItem("username", user.username);
+    localStorage.setItem("id", user.id);
 
-    
+    const landing = document.getElementById('landing');
+    landing.className = "hide-page";
+    const habit = document.getElementById('habit-page');
+    habit.className = "";
+
+    renderHabits();
 }
 
 function logout(){
@@ -51,8 +57,8 @@ function logout(){
 }
 
 function currentUser(){
-    const username = localStorage.getItem('username')
-    return username;
+    const id = localStorage.getItem('id')
+    return id;
 }
 
 module.exports = { requestLogin, requestRegistration}
