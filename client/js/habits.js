@@ -50,5 +50,3 @@ async function renderHabits() {
   userHabits.forEach(allHabits);
   feed.appendChild(habits);
 }
-
-renderHabits();
