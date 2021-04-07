@@ -1,5 +1,5 @@
 const jwt_decode = require('jwt-decode');
-const { renderHabits } = require('./habits');
+const { getAllHabbits } = require('./requests');
 
 async function requestLogin(e){
     e.preventDefault();
@@ -54,7 +54,7 @@ function login(token){
     habit.className = "";
     document.getElementById('register').style.display='none'
 
-    renderHabits();
+    getAllHabbits();
 }
 
 function logout(){
@@ -66,3 +66,4 @@ function currentUser(){
     return username;
 }
 
+module.exports = {requestLogin, requestRegistration}

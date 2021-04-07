@@ -1,6 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const jwt_decode = require('jwt-decode');
-const { renderHabits } = require('./habits');
+const { getAllHabbits } = require('./requests');
 
 async function requestLogin(e){
     e.preventDefault();
@@ -55,7 +55,7 @@ function login(token){
     habit.className = "";
     document.getElementById('register').style.display='none'
 
-    renderHabits();
+    getAllHabbits();
 }
 
 function logout(){
@@ -67,11 +67,9 @@ function currentUser(){
     return username;
 }
 
-
-},{"./habits":2,"jwt-decode":7}],2:[function(require,module,exports){
-const { getAllHabbits } = require('./requests')
-
-async function renderHabits() {
+module.exports = {requestLogin, requestRegistration}
+},{"./requests":6,"jwt-decode":7}],2:[function(require,module,exports){
+async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
   const testData = [{
@@ -84,7 +82,6 @@ async function renderHabits() {
     streak_end: "test",
     user_id: 1
   }]
-  const userHabits = await getAllHabbits();
 
   const allHabits = (habitData) => {
     const habit = document.createElement('div');
@@ -120,22 +117,26 @@ async function renderHabits() {
     habits.appendChild(habit);
   }
 
-  testData.forEach(allHabits);
+  data.forEach(allHabits);
   feed.appendChild(habits);
 }
 
 module.exports = {renderHabits};
-},{"./requests":6}],3:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 const { requestLogin, requestRegistration } = require('./auth')
+const { postHabit } = require('./requests');
 
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
+const habitForm = document.getElementById('habit-form');
 
 loginForm.addEventListener('submit', requestLogin)
 
 registerForm.addEventListener('submit', requestRegistration)
 
-},{"./auth":1}],4:[function(require,module,exports){
+habitForm.addEventListener('submit', postHabit)
+
+},{"./auth":1,"./requests":6}],4:[function(require,module,exports){
 require('./auth');
 require('./habits');
 require('./handlers');
@@ -151,18 +152,23 @@ $('#password, #confirm_password').on('keyup', function () {
 
 
 },{}],6:[function(require,module,exports){
+const { renderHabits } = require('./habits');
+
 async function postHabit(e){
     e.preventDefault();
     try {
         let formData = new FormData(e.target)
+        let userID = localStorage.getItem('id')
+        formData.append('id', userID);
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') },
+            body: JSON.stringify(Object.fromEntries(formData))
         }
         const r = await fetch(`http://localhost:3000/habits`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
+        renderHabits([data]);
     } catch (err) {
         console.warn(err);
     }
@@ -173,20 +179,22 @@ async function postHabit(e){
 async function getAllHabbits(){
     try {
         let id = localStorage.getItem('id')
+        console.log(id);
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
         const response = await fetch(`http://localhost:3000/habits/${id}`, options);
         const data = await response.json();
+        console.log(data);
         if (data.err){ throw Error(data.err) }
-        return data;
+        renderHabits(data);
     } catch (err) {
         console.warn(err);
     }
 }
 
 module.exports = { getAllHabbits, postHabit }
-},{}],7:[function(require,module,exports){
+},{"./habits":2}],7:[function(require,module,exports){
 "use strict";function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";const a=o;a.default=o,a.InvalidTokenError=n,module.exports=a;
 
 

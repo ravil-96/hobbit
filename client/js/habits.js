@@ -1,6 +1,4 @@
-const { getAllHabbits } = require('./requests')
-
-async function renderHabits() {
+async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
   const testData = [{
@@ -13,7 +11,6 @@ async function renderHabits() {
     streak_end: "test",
     user_id: 1
   }]
-  const userHabits = await getAllHabbits();
 
   const allHabits = (habitData) => {
     const habit = document.createElement('div');
@@ -49,7 +46,7 @@ async function renderHabits() {
     habits.appendChild(habit);
   }
 
-  testData.forEach(allHabits);
+  data.forEach(allHabits);
   feed.appendChild(habits);
 }
 
