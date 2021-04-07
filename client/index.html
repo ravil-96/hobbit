@@ -24,6 +24,11 @@
             href="images/favicon/apple-touch-icon.png"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="js/habits.js" defer></script>
+        <script src="js/auth.js" defer></script>
+        <script src="js/index.js" defer></script>
+        <script src="js/login.js" defer></script>
+        <script src="js/requests.js" defer></script>
         <link
             rel="icon"
             type="image/png"
@@ -39,7 +44,7 @@
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="stylesheet" href="css/login.css"/>
     </head>
-    <body>
+    <div>
         <header>
             <img src="images/logo.png" alt="logo" />
             <div class="header-buttons">
@@ -109,11 +114,11 @@
             <div class="container">
                 <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
             </div>
-            <script type="text/javascript" src="js/login.js"></script>
+            <scrip type="text/javascript" src="js/login.js"></scrip>
         </form>
     </div>
 
-
+    <div id="landing" class="">
         <section class="section-1">
             <div class="info">
                 <h1>HOBBIT</h1>
@@ -223,6 +228,27 @@
             </div>
         </section>
 
+
+    </div>
+    <section id="habit-page" class="hide-page">
+        <div id="habbit-list">
+
+        </div>
+        <h1>Your habits:</h1>
+        <form id="habit-form">
+            <label for="name">Habit:</label>
+            <input type="text" id="name" name="name" />
+            <label for="desc">Description:</label>
+            <input type="text" id="desc" name="desc" />
+            <label for="freq">Frequency:</label>
+            <select name="freq" id="freq" multiple>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            </select>
+        </form>
+        <button id="sign-out">Sign Out</button>
+        <h1>Welcome [username]</h1>
+    </section>
         <footer>
             <div class="extra-info">
                 <div class="contacts">
