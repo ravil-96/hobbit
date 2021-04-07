@@ -442,6 +442,17 @@ i {
     display: none !important;
 }
 
+.single-habit {
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.single-habit h3 {
+    text-align: center;
+}
+
+
+
 @media (max-width: 750px) {
     footer {
         padding-top: 30px;
