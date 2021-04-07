@@ -4,11 +4,13 @@ const { renderHabits } = require('./habits');
 
 async function requestLogin(e){
     e.preventDefault();
+    
     try {
+        let formData = new FormData(e.target)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(Object.fromEntries(formData))
         }
 
         console.log(options.body);
@@ -25,10 +27,11 @@ async function requestRegistration(e) {
     console.log('Test');
     e.preventDefault();
     try {
+        let formData = new FormData(e.target)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(Object.fromEntries(formData))
         }
         console.log(options.body);
         const r = await fetch(`http://localhost:3000/auth/register`, options)
@@ -44,11 +47,13 @@ function login(token){
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
     localStorage.setItem("id", user.id);
+    localStorage.setItem("username", user.username);
 
     const landing = document.getElementById('landing');
     landing.className = "hide-page";
     const habit = document.getElementById('habit-page');
     habit.className = "";
+    document.getElementById('register').style.display='none'
 
     renderHabits();
 }
@@ -58,11 +63,11 @@ function logout(){
 }
 
 function currentUser(){
-    const id = localStorage.getItem('id')
-    return id;
+    const username = localStorage.getItem('username')
+    return username;
 }
 
-module.exports = { requestLogin, requestRegistration}
+
 },{"./habits":2,"jwt-decode":7}],2:[function(require,module,exports){
 const { getAllHabbits } = require('./requests')
 
@@ -115,7 +120,7 @@ async function renderHabits() {
     habits.appendChild(habit);
   }
 
-  userHabits.forEach(allHabits);
+  testData.forEach(allHabits);
   feed.appendChild(habits);
 }
 
@@ -129,6 +134,7 @@ const registerForm = document.getElementById('register-form');
 loginForm.addEventListener('submit', requestLogin)
 
 registerForm.addEventListener('submit', requestRegistration)
+
 },{"./auth":1}],4:[function(require,module,exports){
 require('./auth');
 require('./habits');
@@ -163,13 +169,13 @@ async function postHabit(e){
 
 
 
-
 async function getAllHabbits(){
     try {
+        let id = localStorage.getItem('id')
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-        const response = await fetch('http://localhost:3000/habits', options);
+        const response = await fetch(`http://localhost:3000/habits/${id}`, options);
         const data = await response.json();
         if (data.err){ throw Error(data.err) }
         return data;

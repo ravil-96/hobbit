@@ -3,11 +3,13 @@ const { renderHabits } = require('./habits');
 
 async function requestLogin(e){
     e.preventDefault();
+    
     try {
+        let formData = new FormData(e.target)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(Object.fromEntries(formData))
         }
 
         console.log(options.body);
@@ -24,10 +26,11 @@ async function requestRegistration(e) {
     console.log('Test');
     e.preventDefault();
     try {
+        let formData = new FormData(e.target)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(Object.fromEntries(formData))
         }
         console.log(options.body);
         const r = await fetch(`http://localhost:3000/auth/register`, options)
@@ -43,11 +46,13 @@ function login(token){
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
     localStorage.setItem("id", user.id);
+    localStorage.setItem("username", user.username);
 
     const landing = document.getElementById('landing');
     landing.className = "hide-page";
     const habit = document.getElementById('habit-page');
     habit.className = "";
+    document.getElementById('register').style.display='none'
 
     renderHabits();
 }
@@ -57,8 +62,7 @@ function logout(){
 }
 
 function currentUser(){
-    const id = localStorage.getItem('id')
-    return id;
+    const username = localStorage.getItem('username')
+    return username;
 }
 
-module.exports = { requestLogin, requestRegistration}

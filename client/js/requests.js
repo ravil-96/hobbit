@@ -16,13 +16,13 @@ async function postHabit(e){
 
 
 
-
 async function getAllHabbits(){
     try {
+        let id = localStorage.getItem('id')
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-        const response = await fetch('http://localhost:3000/habits', options);
+        const response = await fetch(`http://localhost:3000/habits/${id}`, options);
         const data = await response.json();
         if (data.err){ throw Error(data.err) }
         return data;

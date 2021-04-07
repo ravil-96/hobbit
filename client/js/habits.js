@@ -49,7 +49,7 @@ async function renderHabits() {
     habits.appendChild(habit);
   }
 
-  userHabits.forEach(allHabits);
+  testData.forEach(allHabits);
   feed.appendChild(habits);
 }
 
