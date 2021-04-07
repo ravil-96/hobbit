@@ -1,6 +1,10 @@
 async function requestLogin(e){
     e.preventDefault();
+    
     try {
+        let formData = new FormData(e.target)
+        if(formData.delete) formData.delete('remember');
+
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -18,10 +22,13 @@ async function requestLogin(e){
 async function requestRegistration(e) {
     e.preventDefault();
     try {
+        let formData = new FormData(e.target)
+        formData.delete('remember')
+
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(Object.fromEntries(formData))
         }
         const r = await fetch(`http://localhost:3000/auth/register`, options)
         const data = await r.json()
@@ -46,3 +53,4 @@ function currentUser(){
     const username = localStorage.getItem('username')
     return username;
 }
+
