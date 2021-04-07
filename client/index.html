@@ -38,6 +38,7 @@
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="stylesheet" href="css/login.css"/>
+        <link rel="stylesheet" href="css/responsiveness.css"/>
     </head>
     <body>
         <header>
@@ -57,13 +58,13 @@
                     alt="Avatar" class="avatar">
                 </div>
                 <div class="container">
-                    <label for="uname"><b>Username:</b></label>
-                    <input type="text" placeholder="Enter Your Username" name="uname" required>
+                    <label for="uname">Username:</label><br>
+                    <input type="text" placeholder="Enter Your Username" name="uname" required><br>
                     
-                    <label for="password"><b>Password:</b></label>
-                    <input type="password" placeholder="Enter Your Password" name="password" required>
+                    <label for="password">Password:</label><br>
+                    <input type="password" placeholder="Enter Your Password" name="password" required><br><br>
 
-                    <button type="submit">LOGIN</button>
+                    <button type="submit" class="loginbtn">LOGIN</button>
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember Me
                     </label>
@@ -101,7 +102,7 @@
                 <input type="password" id="confirm_password" placeholder="Re-Enter Your Password" name="confirm_password" required>
                 <span id ='message'></span>
 
-                <button type="submit">Register</button>
+                <button type="submit" class="registerbtn">REGISTER</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember Me
                 </label>
