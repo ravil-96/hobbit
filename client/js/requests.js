@@ -1,6 +1,7 @@
 async function postHabit(e){
     e.preventDefault();
     try {
+        let formData = new FormData(e.target)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
