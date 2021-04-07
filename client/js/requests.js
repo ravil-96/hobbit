@@ -16,7 +16,6 @@ async function postHabit(e){
 
 
 
-
 async function getAllHabbits(){
     try {
         const options = {
