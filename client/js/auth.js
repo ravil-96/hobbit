@@ -1,10 +1,9 @@
+
 async function requestLogin(e){
     e.preventDefault();
     
     try {
         let formData = new FormData(e.target)
-        if(formData.delete) formData.delete('remember');
-
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -23,8 +22,6 @@ async function requestRegistration(e) {
     e.preventDefault();
     try {
         let formData = new FormData(e.target)
-        formData.delete('remember')
-
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -43,6 +40,7 @@ function login(token){
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
     localStorage.setItem("username", user.username);
+    localStorage.setItem("id", user.id);
 }
 
 function logout(){
