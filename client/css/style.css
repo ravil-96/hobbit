@@ -502,3 +502,51 @@ i {
 .single-habit h3 {
     text-align: left;
 }
+
+/* hobby page */
+
+#habit-form {
+    font-size: 2rem;
+    width: 2rem;
+    background-color: rgba(75, 73, 73, 0.233);
+    position: fixed;
+    right: 0;
+    padding-left: 2px;
+  }
+  #name {
+    width:100%;
+    height: 2rem;
+    padding-left: 0.4rem;
+    border-radius: 4px;
+  
+  }
+  #desc {
+    width: 100%;
+    height: 2rem;
+    border-radius: 4px;
+    padding-left: 0.4rem
+  }
+  #freq {
+    width: 8rem;
+    font-size: 1.3rem;
+  }
+  #submitbtn {
+    display: inline-block;
+    font-size: 1.3rem;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    color: #fff;
+    background: linear-gradient(
+          to right,
+          rgb(245, 210, 112),
+          hsl(12, 83%, 70%)
+      );
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    width: 18rem;
+    padding:2px
+  }
+
+  
