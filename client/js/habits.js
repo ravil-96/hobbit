@@ -1,3 +1,5 @@
+const { getAllHabbits } = require("./requests");
+
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
@@ -19,10 +21,11 @@ async function renderHabits(data) {
     const name = document.createElement('h3');
     name.textContent = habitData.name;
     const desc = document.createElement('p');
-    desc.textContent = habitData.habit_desc;
+    desc.textContent = habitData.desc;
     const freq = document.createElement('p');
     freq.textContent = `Frequency: ${habitData.frequency}`;
     const track = document.createElement('p');
+    track.id = `count-${habitData.id}`
     track.textContent = habitData.streak_track;
     const startDate = document.createElement('p');
     startDate.textContent = habitData.streak_start;
@@ -31,9 +34,19 @@ async function renderHabits(data) {
     const checkBoxLabel = document.createElement('label');
     checkBoxLabel.for=`complete-${habitData.id}`;
     const checkBox = document.createElement('input');
+
+    const current_date = new Date();
+    const old_date = new Date(habitData.streak_complete)
     checkBox.type = "checkbox";
     checkBox.id = `complete-${habitData.id}`;
     checkBox.name = `complete-${habitData.id}`;
+    if(old_date && old_date > current_date) {
+      checkBox.disabled = true;
+    } else {
+      checkBox.disabled = false;
+    }
+
+    checkBox.addEventListener('change', updateHabitClient)
 
     habit.appendChild(name);
     habit.appendChild(desc);
@@ -48,6 +61,38 @@ async function renderHabits(data) {
 
   data.forEach(allHabits);
   feed.appendChild(habits);
+}
+
+async function updateHabitClient(e) {
+  e.target.disable = true;
+  const habit_id = e.target.parentElement.id;
+  console.log(e);
+  try {
+      console.log(habit_id);
+      const options = {
+          method: 'PATCH',
+          headers: new Headers({'Authorization': localStorage.getItem('token')}),
+      }
+      const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+      const data = await response.json();
+      console.log(data);
+      if (data.err){ throw Error(data.err) }
+      updateStreak(data);
+  } catch (err) {
+      console.warn(err);
+  }
+}
+
+async function updateStreak(data) {
+  let id = localStorage.getItem('id')
+  let count = data.streak_track;
+  console.log('Test')
+  console.log(data.streak_track);
+  console.log(data.id);
+  let checkedBox = document.getElementById(`complete-${data.id}`);
+  checkedBox.disable = true;
+  let theCounter = document.getElementById(`count-${data.id}`)
+  theCounter.textContent = count;
 }
 
 module.exports = {renderHabits};
