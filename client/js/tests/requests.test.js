@@ -33,6 +33,7 @@ describe('requests', () => {
       }
 
     beforeEach(() => {
+        updateStreak.mockClear()
         renderHabits.mockClear();
         console.warn.mockClear();
         fetch.resetMocks();
@@ -116,12 +117,8 @@ describe('requests', () => {
               await reqs.updateHabitClient(habitEvent)
     
               expect(fetch).toHaveBeenCalledTimes(1)
-              console.log(updateStreak.mock.calls[0])
-              expect(console.warn).toHaveBeenCalledTimes(1)
-
               expect(updateStreak).toHaveBeenCalledTimes(0)
-              
-              
+              expect(console.warn).toHaveBeenCalledTimes(1)  
             })
      })
 
