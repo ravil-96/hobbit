@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"watchify ./static/js/layout.js -o bundle.js\" \"http-server\"",
+    "dev": "concurrently \"watchify ./js/index.js -o bundle.js\" \"http-server\"",
     "test": "jest",
     "coverage": "jest --coverage"
   },
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "jwt-decode": "^3.1.2",
     "watchify": "^4.0.0",
     "http-server": "^0.12.3"
   }

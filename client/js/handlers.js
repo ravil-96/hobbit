@@ -1,6 +1,12 @@
-let forms = document.querySelectorAll('form');
-const loginForm = forms[0];
-const registerForm = forms[1];
+const { requestLogin, requestRegistration } = require('./auth')
+const { postHabit } = require('./requests');
 
-loginForm.addEventListener('submit',requestLogin );
-registerForm.addEventListener('submit',requestRegistration );
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+const habitForm = document.getElementById('habit-form');
+
+loginForm.addEventListener('submit', requestLogin)
+
+registerForm.addEventListener('submit', requestRegistration)
+
+habitForm.addEventListener('submit', postHabit)
