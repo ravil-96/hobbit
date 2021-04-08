@@ -1,4 +1,5 @@
 const { renderHabits } = require('./habits');
+const API_URL = require('./url');
 
 async function postHabit(e){
     e.preventDefault();
@@ -11,7 +12,7 @@ async function postHabit(e){
             headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') },
             body: JSON.stringify(Object.fromEntries(formData))
         }
-        const r = await fetch(`http://localhost:3000/habits`, options)
+        const r = await fetch(`${API_URL}/habits`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         renderHabits([data]);
@@ -29,7 +30,7 @@ async function getAllHabbits(){
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-        const response = await fetch(`http://localhost:3000/habits/${id}`, options);
+        const response = await fetch(`${API_URL}/habits/${id}`, options);
         const data = await response.json();
         console.log(data);
         if (data.err){ throw Error(data.err) }
