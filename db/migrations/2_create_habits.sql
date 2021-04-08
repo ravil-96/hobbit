@@ -6,8 +6,8 @@ CREATE TABLE habits (
   habit_desc VARCHAR(255),
   frequency VARCHAR(255),
   streak_track INT NOT NULL,
-  streak_start INT NOT NULL,
-  streak_end INT NOT NULL,
+  streak_end VARCHAR(255) NOT NULL,
+  streak_complete VARCHAR(255),
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 )
