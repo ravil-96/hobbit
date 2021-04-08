@@ -504,31 +504,47 @@ i {
 }
 
 /* hobby page */
-
+#habit-page {
+    background-color:  #f7e0d5;
+}
 #habit-form {
-    font-size: 2rem;
-    width: 2rem;
-    background-color: rgba(75, 73, 73, 0.233);
+    font-size: 1.5rem;
+    width: 35rem;
     position: fixed;
-    right: 0;
-    padding-left: 2px;
+    left: 4px;
+    margin-left: 2rem;
+    background-color: rgba(128, 128, 128, 0.473);
+    border-radius: 25px;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
+#habit-form h1 {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+#habit-form h2 {
+    text-align: center;
+    font-size: 1rem;
+}
   #name {
     width:100%;
     height: 2rem;
     padding-left: 0.4rem;
     border-radius: 4px;
+    margin-right: 2px;
   
   }
   #desc {
     width: 100%;
     height: 2rem;
     border-radius: 4px;
-    padding-left: 0.4rem
+    padding-left: 0.4rem;
+    margin-right: 2px;
   }
   #freq {
     width: 8rem;
     font-size: 1.3rem;
+    border-radius: 50px;
   }
   #submitbtn {
     display: inline-block;
@@ -546,7 +562,7 @@ i {
     border-radius: 15px;
     box-shadow: 0 9px #999;
     width: 18rem;
-    padding:2px
+    margin-left:6rem;
   }
 
   
