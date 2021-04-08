@@ -1,0 +1,141 @@
+/* IPAD Pro */
+@media only screen and (max-width: 1024px) {
+    input[type=text], input[type=password] {
+        width: 40rem;
+        padding-left: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        height: 4rem;
+        font-size: 2rem;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+    
+      .container {
+        padding: 0.5rem;
+        width: 41rem;
+        text-align: left;
+        align-items: flex-end;
+        font-size: 2rem;
+      }
+      .cancelbtn {
+          font-size: 2rem;
+          margin-left: 15rem;
+          
+      }
+      .loginbtn {
+          font-size: 2rem;
+      }
+      .registerbtn {
+          font-size: 2rem;
+      }
+    }
+
+/* IPAD  */
+@media only screen and (max-width: 768px) {
+    input[type=text], input[type=password] {
+        width: 34rem;
+        padding-left: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        height: 4rem;
+        font-size: 1.5rem;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+    
+      .container {
+        padding: 0.5rem;
+        width: 35rem;
+        text-align: left;
+        align-items: flex-end;
+        font-size: 1.9rem;
+      }
+      .cancelbtn {
+        font-size: 2rem;
+        margin-left: 12rem;
+    }
+    .loginbtn {
+        font-size: 2rem;
+    }
+    .registerbtn {
+        font-size: 2rem;
+    }
+    }
+
+
+/* IPhone 6/7/8 plus  */
+@media only screen and (max-width: 415px) {
+    input[type=text], input[type=password] {
+        width: 21rem;
+        padding-left: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        height: 2rem;
+        font-size: 0.8rem;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+    
+      .container {
+        padding: 0.5rem;
+        width: 22rem;
+        text-align: left;
+        align-items: flex-end;
+        font-size: 1rem;
+      }
+      .cancelbtn {
+        font-size: 1.5rem;
+        margin-left: 7rem;
+    }
+    .loginbtn {
+        font-size: 1.5rem;
+    }
+    .registerbtn {
+        font-size: 1.5rem;
+    }
+    }
+    
+    /*Iphone 6/7/8  */
+@media only screen and (max-width: 376px) {
+    input[type=text], input[type=password] {
+        width: 17rem;
+        padding-left: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        height: 2rem;
+        font-size: 0.8rem;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .container {
+        padding: 0.5rem;
+        width: 18rem;
+        text-align: left;
+        align-items: flex-end;
+        font-size: 0.8rem;
+      }
+      .cancelbtn {
+        font-size: 1.2rem;
+        margin-left: 5rem;
+
+    }
+    .loginbtn {
+        font-size: 1.2rem;
+    }
+    .registerbtn {
+        font-size: 1.2rem;
+    }
+    }
