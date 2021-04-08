@@ -494,3 +494,11 @@ i {
         margin: 1rem;
     }
 }
+
+.single-habit {
+    margin: 10px;
+}
+
+.single-habit h3 {
+    text-align: left;
+}
