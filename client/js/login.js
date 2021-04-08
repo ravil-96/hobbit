@@ -5,3 +5,4 @@ $('#password, #confirm_password').on('keyup', function () {
       $('#message').html('NOT MATCHING').css('color', 'red');
   });
 
+  
