@@ -80,40 +80,49 @@ describe('requests', () => {
             
           })
 
-        it("expecting console warn error message if GET request fails", async () => {
+        it("expecting console warn as GET request fails and renderHabits shouldn't trigger", async () => {
         
               fetch.mockReject(() => Promise.reject( "error"))
               await reqs.getAllHabbits()
     
               expect(fetch).toHaveBeenCalledTimes(1)
+              expect(renderHabits).toHaveBeenCalledTimes(0)
               expect(console.warn).toHaveBeenCalledTimes(1)
               
             })
      })
 
      describe('updateHabitClient func ', () => {
+        
+        const habitEvent = { target: {parentElement:{id:1}}}
 
-        it('should make PATCH request', async () => {
+
+
+        it('should make PATCH request and call updateStreak func', async () => {
 
             fetch.mockResponseOnce(JSON.stringify(testData))
-            await reqs.updateHabitClient(e)
+            await reqs.updateHabitClient(habitEvent)
 
             expect(fetch.mock.calls[0][1]).toHaveProperty('method', 'PATCH')
             expect(fetch.mock.calls[0][0]).toMatch("http://localhost:3000/habits/1")
-            // expect(renderHabits).toHaveBeenCalledTimes(1)
-            // expect(console.warn).toHaveBeenCalledTimes(0)
+            expect(updateStreak).toHaveBeenCalledTimes(1)
+            expect(console.warn).toHaveBeenCalledTimes(0)
             
           })
 
-        // it("expecting console warn error message if GET request fails", async () => {
+        it("error should trigger console.warn , updateStreak should not be called", async () => {
         
-        //       fetch.mockReject(() => Promise.reject( "error"))
-        //       await reqs.updateHabitClient(e)
+              fetch.mockReject(() => Promise.reject({err: "error"}) )
+              await reqs.updateHabitClient(habitEvent)
     
-        //       expect(fetch).toHaveBeenCalledTimes(1)
-        //       expect(console.warn).toHaveBeenCalledTimes(1)
+              expect(fetch).toHaveBeenCalledTimes(1)
+              console.log(updateStreak.mock.calls[0])
+              expect(console.warn).toHaveBeenCalledTimes(1)
+
+              expect(updateStreak).toHaveBeenCalledTimes(0)
               
-        //     })
+              
+            })
      })
 
 

@@ -40,9 +40,7 @@ async function getAllHabbits(){
 async function updateHabitClient(e) {
     e.target.disable = true;
     const habit_id = e.target.parentElement.id;
-    console.log(e);
     try {
-        console.log(habit_id);
         const options = {
             method: 'PATCH',
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
