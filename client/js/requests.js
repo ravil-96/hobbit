@@ -1,4 +1,4 @@
-const { renderHabits } = require('./habits');
+const { renderHabits,  updateStreak } = require('./habits');
 
 async function postHabit(e){
     e.preventDefault();
@@ -21,17 +21,15 @@ async function postHabit(e){
 }
 
 
-
 async function getAllHabbits(){
     try {
         let id = localStorage.getItem('id')
-        console.log(id);
         const options = {
+            method: 'GET',
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
         const response = await fetch(`http://localhost:3000/habits/${id}`, options);
         const data = await response.json();
-        console.log(data);
         if (data.err){ throw Error(data.err) }
         renderHabits(data);
     } catch (err) {
@@ -39,4 +37,24 @@ async function getAllHabbits(){
     }
 }
 
-module.exports = { getAllHabbits, postHabit }
+async function updateHabitClient(e) {
+    e.target.disable = true;
+    const habit_id = e.target.parentElement.id;
+    console.log(e);
+    try {
+        console.log(habit_id);
+        const options = {
+            method: 'PATCH',
+            headers: new Headers({'Authorization': localStorage.getItem('token')}),
+        }
+        const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+        const data = await response.json();
+        console.log(data);
+        if (data.err){ throw Error(data.err) }
+        updateStreak(data);
+    } catch (err) {
+        console.warn(err);
+    }
+  }
+
+module.exports = { getAllHabbits, postHabit, updateHabitClient }

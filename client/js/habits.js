@@ -1,4 +1,4 @@
-const { getAllHabbits } = require("./requests");
+const { getAllHabbits, updateHabitClient } = require("./requests");
 
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
@@ -63,25 +63,6 @@ async function renderHabits(data) {
   feed.appendChild(habits);
 }
 
-async function updateHabitClient(e) {
-  e.target.disable = true;
-  const habit_id = e.target.parentElement.id;
-  console.log(e);
-  try {
-      console.log(habit_id);
-      const options = {
-          method: 'PATCH',
-          headers: new Headers({'Authorization': localStorage.getItem('token')}),
-      }
-      const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
-      const data = await response.json();
-      console.log(data);
-      if (data.err){ throw Error(data.err) }
-      updateStreak(data);
-  } catch (err) {
-      console.warn(err);
-  }
-}
 
 async function updateStreak(data) {
   console.log(data);
@@ -96,4 +77,4 @@ async function updateStreak(data) {
   theCounter.textContent = count;
 }
 
-module.exports = {renderHabits};
+module.exports = {renderHabits, updateStreak};

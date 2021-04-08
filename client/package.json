@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"watchify ./js/index.js -o bundle.js\" \"http-server\"",
-    "test": "jest",
+    "test": "jest --coverage",
     "coverage": "jest --coverage"
   },
   "keywords": [],
@@ -17,8 +17,9 @@
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "http-server": "^0.12.3",
+    "jest-fetch-mock": "^3.0.3",
     "jwt-decode": "^3.1.2",
-    "watchify": "^4.0.0",
-    "http-server": "^0.12.3"
+    "watchify": "^4.0.0"
   }
 }
