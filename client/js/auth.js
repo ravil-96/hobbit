@@ -1,5 +1,7 @@
 const jwt_decode = require('jwt-decode');
 const { getAllHabbits } = require('./requests');
+const API_URL = require('./url');
+
 
 async function requestLogin(e){
     e.preventDefault();
@@ -13,7 +15,7 @@ async function requestLogin(e){
         }
 
         console.log(options.body);
-        const r = await fetch(`http://localhost:3000/auth/login`, options)
+        const r = await fetch(`${API_URL}/auth/login`, options)
         const data = await r.json()
         if (!data.success) { throw new Error('Login not authorised'); }
         login(data.token);
@@ -33,7 +35,7 @@ async function requestRegistration(e) {
             body: JSON.stringify(Object.fromEntries(formData))
         }
         console.log(options.body);
-        const r = await fetch(`http://localhost:3000/auth/register`, options)
+        const r = await fetch(`${API_URL}/auth/register`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         requestLogin(e);
