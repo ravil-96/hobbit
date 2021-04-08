@@ -155,13 +155,14 @@ async function updateHabitClient(e) {
 }
 
 async function updateStreak(data) {
+  console.log(data);
   let id = localStorage.getItem('id')
   let count = data.streak_track;
   console.log('Test')
   console.log(data.streak_track);
   console.log(data.id);
   let checkedBox = document.getElementById(`complete-${data.id}`);
-  checkedBox.disable = true;
+  checkedBox.disabled = true;
   let theCounter = document.getElementById(`count-${data.id}`)
   theCounter.textContent = count;
 }
