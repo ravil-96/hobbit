@@ -83,35 +83,18 @@ describe('habits controller', () => {
             await habitsController.updateHabit(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
         })
-        // test('it returns a 404 status on unsuccessful update', async () => {
-        //     let testHabit = {
-        //         id: 1, 
-        //         name: 'Exercise', 
-        //         desc: 'Exercise once a day',
-        //         frequency: 'Daily', 
-        //         streak_track: 3,
-        //         streak_end: "Streak End",
-        //         streak_complete: "Streak Complete",
-        //         userId: 1,
-        //     }
-        //     jest.spyOn(Habit.prototype, 'update')
-        //     .mockResolvedValue(undefined);
-        //     const mockReq = { id: 1  }
-        //     await habitsController.updateHabit(mockReq, mockRes);
-        //     expect(mockStatus).toHaveBeenCalledWith(404);
-        //     });
     });
 
 
     // doesnt pass test currently - but might not need if we don't implement delete function
-    // describe('destroy', () => {
-    //     test('it returns a 204 status code on successful deletion', async () => {
-    //         jest.spyOn(Habit.prototype, 'destroy')
-    //             .mockResolvedValue('Deleted');
+    describe('destroy', () => {
+        test('it returns a 204 status code on successful deletion', async () => {
+            jest.spyOn(Habit.prototype, 'destroy')
+                .mockResolvedValue('Deleted');
             
-    //         const mockReq = { params: {id: 1} }
-    //         await habitsController.destroyHabit(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(204);
-    //     })
-    // });
+            const mockReq = { params: {id: 1} }
+            await habitsController.destroyHabit(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(204);
+        })
+    });
 })
