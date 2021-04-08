@@ -53,12 +53,15 @@ function login(token){
     const habit = document.getElementById('habit-page');
     habit.className = "";
     document.getElementById('register').style.display='none'
+    document.getElementById('login').style.display='none'
+    document.querySelector('.header-buttons').style.display='none'
 
     getAllHabbits();
 }
 
 function logout(){
     localStorage.clear();
+    location.reload();
 }
 
 function currentUser(){
@@ -66,4 +69,4 @@ function currentUser(){
     return username;
 }
 
-module.exports = {requestLogin, requestRegistration}
+module.exports = {requestLogin, requestRegistration, logout}
