@@ -1,4 +1,5 @@
 const { getAllHabbits } = require("./requests");
+const API_URL = require('./url');
 
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
@@ -78,7 +79,7 @@ async function renderHabits(data) {
     habit.appendChild(checkBoxLabel);
     habit.appendChild(checkBox);
 
-    habits.appendChild(habit);
+    habits.prepend(habit);
   }
 
   data.forEach(allHabits);
