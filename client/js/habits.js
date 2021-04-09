@@ -100,7 +100,7 @@ async function updateStreak(data) {
   let checkedBox = document.getElementById(`complete-${data.id}`);
   checkedBox.disabled = true;
   let theCounter = document.getElementById(`count-${data.id}`)
-  theCounter.textContent = count;
+  theCounter.textContent = `Streak: ${count}`;
 }
 
 
