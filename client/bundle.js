@@ -235,7 +235,7 @@ $('#password, #confirm_password').on('keyup', function () {
       $('#message').html('NOT MATCHING').css('color', 'red');
   });
 
-
+  
 },{}],6:[function(require,module,exports){
 const { renderHabits } = require('./habits');
 const API_URL = require('./url');
