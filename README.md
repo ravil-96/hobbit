@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![](hobbit-demo.gif)
+![](hobbitdemo.gif)
 
 Studies show that it takes 21 days to form a habit. Hobbit helps you create these healthy routines by allowing you to set habit goals, track your progress, and then motivating you with streaks. Users are able to register for a Hobbit account, upon login they are able to access thier dashboard where they can add a customised habit, mark as complete for the day/week (depdending on chosen frequency) and see their most recent completion streaks.
 
