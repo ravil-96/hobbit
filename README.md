@@ -1,5 +1,7 @@
 # Hobbit
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/054b8791-6392-4eed-baae-0ae67f016a4b/deploy-status)](https://app.netlify.com/sites/hobbit/deploys)
+![Heroku](https://heroku-badge.herokuapp.com/?app=hobbit-api)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![](hobbitdemo.gif)
