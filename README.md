@@ -1,5 +1,7 @@
 # Hobbit
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Studies show that it takes 21 days to form a habit. Hobbit helps you create these healthy routines by allowing you to set habit goals, track your progress, and then motivating you with streaks. Users are able to register for a Hobbit account, upon login they are able to access thier dashboard where they can add a customised habit, mark as complete for the day/week (depdending on chosen frequency) and see their most recent completion streaks.
 
 ### Installation
@@ -16,6 +18,8 @@ Studies show that it takes 21 days to form a habit. Hobbit helps you create thes
 -   Run `bash _scripts/stop.sh` to close the containers
 -   Run `bash _scripts/teardown.sh` to teardown the containers completely and remove all artifacts
 
+***Do not run both dev and test environments at the same time.***
+
 ## Technologies
 
 -   Client side: HTML, CSS and JavaScript
@@ -29,14 +33,14 @@ Studies show that it takes 21 days to form a habit. Hobbit helps you create thes
 -   Used the GitHub project board to split up the required tasks
 -   Designed the basic layout of the webapge on Figma
 -   Set up the file structure and configured the docker containers and script files
-
+-   Initialised and seeded into the PostgreSQL database
 
 ## Wins & Challenges
 
 ### Wins
 
 -   Well designed webpage that is largely responsive on desktop, mobile and tablet devices
--   Users are able to register for an account and login
+-   Use of JWT web tokens allowing users to register for an account and login
 -   Password matching function which allows user to see if their password field matches with confirmed password field when registering for an account
 -   Core functionalities achieved: users able to specify any habit they want to track and choose the frequency, habits can be marked as completed, users can see their streak count
 -   Client deployed on Netlify and server on Heroku. In addition there is sucessful communication between client and server
