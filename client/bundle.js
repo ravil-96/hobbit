@@ -1,6 +1,8 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const jwt_decode = require('jwt-decode');
 const { getAllHabbits } = require('./requests');
+const API_URL = require('./url');
+
 
 async function requestLogin(e){
     e.preventDefault();
@@ -14,7 +16,7 @@ async function requestLogin(e){
         }
 
         console.log(options.body);
-        const r = await fetch(`http://localhost:3000/auth/login`, options)
+        const r = await fetch(`${API_URL}/auth/login`, options)
         const data = await r.json()
         if (!data.success) { throw new Error('Login not authorised'); }
         login(data.token);
@@ -34,7 +36,7 @@ async function requestRegistration(e) {
             body: JSON.stringify(Object.fromEntries(formData))
         }
         console.log(options.body);
-        const r = await fetch(`http://localhost:3000/auth/register`, options)
+        const r = await fetch(`${API_URL}/auth/register`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         requestLogin(e);
@@ -54,12 +56,15 @@ function login(token){
     const habit = document.getElementById('habit-page');
     habit.className = "";
     document.getElementById('register').style.display='none'
+    document.getElementById('login').style.display='none'
+    document.querySelector('.header-buttons').style.display='none'
 
     getAllHabbits();
 }
 
 function logout(){
     localStorage.clear();
+    location.reload();
 }
 
 function currentUser(){
@@ -67,8 +72,8 @@ function currentUser(){
     return username;
 }
 
-module.exports = {requestLogin, requestRegistration}
-},{"./requests":6,"jwt-decode":7}],2:[function(require,module,exports){
+module.exports = {requestLogin, requestRegistration, logout}
+},{"./requests":6,"./url":7,"jwt-decode":8}],2:[function(require,module,exports){
 const { getAllHabbits } = require("./requests");
 
 async function renderHabits(data) {
@@ -86,25 +91,45 @@ async function renderHabits(data) {
   }]
 
   const allHabits = (habitData) => {
+    let format_c_date;
+    if (habitData.streak_complete) {
+      const complete_date = new Date(habitData.streak_complete)
+      format_c_date = formatDate(complete_date)
+    } else {
+      format_c_date = 'Not completed yet.'
+    }
+    const end_date = new Date(habitData.streak_end)
+    let format_e_date = formatDate(end_date)
+
     const habit = document.createElement('div');
     habit.id = habitData.id;
     habit.className = "single-habit";
     const name = document.createElement('h3');
     name.textContent = habitData.name;
+    name.className = "habbit-name";
     const desc = document.createElement('p');
     desc.textContent = habitData.desc;
+    desc.className = "habbit-desc";
     const freq = document.createElement('p');
     freq.textContent = `Frequency: ${habitData.frequency}`;
+    freq.className = "habbit-freq";
     const track = document.createElement('p');
     track.id = `count-${habitData.id}`
-    track.textContent = habitData.streak_track;
+    track.textContent = `Streak: ${habitData.streak_track}`;
+    track.className = "habbit-track";
     const startDate = document.createElement('p');
-    startDate.textContent = habitData.streak_start;
+    startDate.textContent = `When you can next complete this habbit: ${format_c_date}`;
+    startDate.className = "habbit-complete-date";
     const endDate = document.createElement('p');
-    endDate.textContent = habitData.streak_end;
+    endDate.textContent = `Streak end date: ${format_e_date}`;
+    endDate.className = "habbit-streak-end";
+    endDate.style = 'margin-bottom: 10px;'
     const checkBoxLabel = document.createElement('label');
     checkBoxLabel.for=`complete-${habitData.id}`;
+    checkBoxLabel.textContent = 'Mark as complete: '
+    checkBoxLabel.className = "habbit-check-label";
     const checkBox = document.createElement('input');
+    checkBox.className = "habbit-checkbox";
 
     const current_date = new Date();
     const old_date = new Date(habitData.streak_complete)
@@ -112,6 +137,7 @@ async function renderHabits(data) {
     checkBox.id = `complete-${habitData.id}`;
     checkBox.name = `complete-${habitData.id}`;
     if(old_date && old_date > current_date) {
+      checkBox.checked = true;
       checkBox.disabled = true;
     } else {
       checkBox.disabled = false;
@@ -125,6 +151,7 @@ async function renderHabits(data) {
     habit.appendChild(track);
     habit.appendChild(startDate);
     habit.appendChild(endDate);
+    habit.appendChild(checkBoxLabel);
     habit.appendChild(checkBox);
 
     habits.appendChild(habit);
@@ -144,7 +171,7 @@ async function updateHabitClient(e) {
           method: 'PATCH',
           headers: new Headers({'Authorization': localStorage.getItem('token')}),
       }
-      const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+      const response = await fetch(`${API_URL}/habits/${habit_id}`, options);
       const data = await response.json();
       console.log(data);
       if (data.err){ throw Error(data.err) }
@@ -167,14 +194,25 @@ async function updateStreak(data) {
   theCounter.textContent = count;
 }
 
+function formatDate(date) {
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
+  const month = monthNames[date.getMonth()];
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+  const format_date = month  + '\n'+ day  + ',' + year;
+  return format_date;
+}
+
 module.exports = {renderHabits};
 },{"./requests":6}],3:[function(require,module,exports){
-const { requestLogin, requestRegistration } = require('./auth')
+const { requestLogin, requestRegistration, logout } = require('./auth')
 const { postHabit } = require('./requests');
 
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 const habitForm = document.getElementById('habit-form');
+const signOutButton = document.getElementById('sign-out')
 
 loginForm.addEventListener('submit', requestLogin)
 
@@ -182,6 +220,7 @@ registerForm.addEventListener('submit', requestRegistration)
 
 habitForm.addEventListener('submit', postHabit)
 
+signOutButton.addEventListener('click', logout)
 },{"./auth":1,"./requests":6}],4:[function(require,module,exports){
 require('./auth');
 require('./habits');
@@ -199,6 +238,7 @@ $('#password, #confirm_password').on('keyup', function () {
 
 },{}],6:[function(require,module,exports){
 const { renderHabits } = require('./habits');
+const API_URL = require('./url');
 
 async function postHabit(e){
     e.preventDefault();
@@ -211,7 +251,7 @@ async function postHabit(e){
             headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') },
             body: JSON.stringify(Object.fromEntries(formData))
         }
-        const r = await fetch(`http://localhost:3000/habits`, options)
+        const r = await fetch(`${API_URL}/habits`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         renderHabits([data]);
@@ -229,7 +269,7 @@ async function getAllHabbits(){
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-        const response = await fetch(`http://localhost:3000/habits/${id}`, options);
+        const response = await fetch(`${API_URL}/habits/${id}`, options);
         const data = await response.json();
         console.log(data);
         if (data.err){ throw Error(data.err) }
@@ -240,7 +280,10 @@ async function getAllHabbits(){
 }
 
 module.exports = { getAllHabbits, postHabit }
-},{"./habits":2}],7:[function(require,module,exports){
+},{"./habits":2,"./url":7}],7:[function(require,module,exports){
+module.exports = 'https://hobbit-api.herokuapp.com'
+//module.exports = 'http://localhost:3000'
+},{}],8:[function(require,module,exports){
 "use strict";function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";const a=o;a.default=o,a.InvalidTokenError=n,module.exports=a;
 
 

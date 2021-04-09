@@ -1,17 +1,21 @@
-global.fetch = require('jest-fetch-mock')
-console.warn = jest.fn()
+global.fetch = require('jest-fetch-mock');
+console.warn = jest.fn();
 
-let auth = require('../auth')
+let auth = require('../auth');
 
 describe('auth tests', () => {
 
-    const form = document.createElement('form')
+    let form;
+    let e;
+
+    beforeAll(() => {
+    form = document.createElement('form');
     form.innerHTML = 
         `<input type="text" name="username" value="abc" >
         <input type="password" id="password" name="password" value="abc" >`
-    let e = {preventDefault: jest.fn(),
+    e = {preventDefault: jest.fn(),
             target:form }
-    
+    })
 
     beforeEach(() => {
         console.warn.mockClear();

@@ -40,6 +40,7 @@
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="stylesheet" href="css/login.css"/>
         <link rel="stylesheet" href="css/responsiveness.css"/>
+        <link rel="stylesheet" href="css/habit.css"/>
     </head>
     <div>
         <header>
@@ -228,24 +229,37 @@
 
     </div>
     <section id="habit-page" class="hide-page">
-        <div id="habbit-list">
-
+       
+        <div id="sign-out">
+            <button id="logout">Sign Out</button> 
         </div>
-        <h1>Your habits:</h1>
+            
+        
+    <div class= habit-entry>    
         <form id="habit-form">
-            <label for="name">Habit:</label>
-            <input type="text" id="name" name="name" />
-            <label for="desc">Description:</label>
-            <input type="text" id="desc" name="desc" />
-            <label for="freq">Frequency:</label>
-            <select name="freq" id="freq" multiple>
+            <h1>Welcome! </h1><br>
+            <h2>Add a new hobby to track here...</h2>
+            <label for="name"><b>Habit:</b></label>
+            <input type="text" id="name" name="name" /><br>
+
+            <label for="desc"><b>Description:</b></label>
+            <input type="text" id="desc" name="desc" /><br>
+
+            <label for="freq"><b>Frequency:</b></label>
+            <select name="freq" id="freq">
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
-            </select>
-            <button type="submit">Submit Habit</button>
+            </select><br><br>
+            <button id="submitbtn" type="submit">Submit Habit</button>
         </form>
-        <button id="sign-out">Sign Out</button>
-        <h1>Welcome [username]</h1>
+    </div>  
+        <br>
+        <div id="habbit-list">
+            <h1>Your habits:</h1>
+
+        </div>
+        
+        
     </section>
         <footer>
             <div class="extra-info">

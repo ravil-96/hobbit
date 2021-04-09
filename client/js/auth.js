@@ -1,5 +1,7 @@
 const jwt_decode = require('jwt-decode');
 const { getAllHabbits } = require('./requests');
+const API_URL = require('./url');
+
 
 async function requestLogin(e){
     e.preventDefault();
@@ -11,7 +13,8 @@ async function requestLogin(e){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
         }
-        const r = await fetch(`http://localhost:3000/auth/login`, options)
+
+        const r = await fetch(`${API_URL}/auth/login`, options)
         const data = await r.json()
         if (!data.success) { throw new Error('Login not authorised'); }
         login(data.token);
@@ -29,7 +32,7 @@ async function requestRegistration(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
         }
-        const r = await fetch(`http://localhost:3000/auth/register`, options)
+        const r = await fetch(`${API_URL}/auth/register`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         requestLogin(e);
@@ -49,12 +52,15 @@ function login(token){
     const habit = document.getElementById('habit-page');
     habit.className = "";
     document.getElementById('register').style.display='none'
+    document.getElementById('login').style.display='none'
+    document.querySelector('.header-buttons').style.display='none'
 
     getAllHabbits();
 }
 
 function logout(){
     localStorage.clear();
+    location.reload();
 }
 
 function currentUser(){
