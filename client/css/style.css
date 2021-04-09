@@ -508,7 +508,7 @@ i {
     background-color:  #f7e0d5;
 }
 #habit-form {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     width: 35rem;
     left: 4px;
     margin-left: 2rem;
@@ -542,12 +542,12 @@ i {
   }
   #freq {
     width: 8rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     border-radius: 50px;
   }
   #submitbtn {
     display: inline-block;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
     text-align: center;
     outline: none;
@@ -558,15 +558,18 @@ i {
           hsl(12, 83%, 70%)
       );
     border: none;
-    border-radius: 15px;
+    border-radius: 30px;
     box-shadow: 0 9px #999;
-    width: 18rem;
-    margin-left:6rem;
+    width: 16rem;
+    margin-left:7.2rem;
+    margin-bottom: 1.5rem;
   }
 #sign-out {
     position: fixed;
     top: 0;
+    margin-top: 1.5rem;
     right: 5px;
+    
 }
 
 #logout {
