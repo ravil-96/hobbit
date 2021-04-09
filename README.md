@@ -10,8 +10,9 @@ Hobbit helps you create healthy routines by helping you set habit goals, track y
 
 -   Navigate to the root directory of this repository
 -   Ensure docker desktop app is running
--   In your terminal run `bash _scripts/startDev.sh` to start the client, server and database containers
+-   In your terminal run `bash _scripts/startDev.sh` to start the client, apit and database containers
     -   Access: client on localhost:8080/ and server on localhost:3000/     
+-   Run `bash _scripts/startTest.sh` to start up the api and database tests
 -   Run `bash _scripts/stop.sh` to close the containers
 -   Run `bash _scripts/teardown.sh` to teardown the containers completely and remove all artifacts
 
@@ -53,9 +54,10 @@ Hobbit helps you create healthy routines by helping you set habit goals, track y
 ## Future Features
 
 -   Enforce minimum requirements for passwords (e.g. must be at least 8 chracters and contain at least one number or special character)
--   Allow users to change credentials
+-   Send back an error message to the user if their credientials are incorrect when trying to login
+-   Users have the ability to change their credentials
 -   Send email alerts to remind user to complete habit or if there streak is about to expire
--   Allow users to delete a habit
+-   Allow users to edit or delete a habit
 -   Implement a page for statistics or graphs so that users can visualise progress
 
 ## Licence
