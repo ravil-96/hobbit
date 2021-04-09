@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![](hobbit-demo.gif)
+
 Studies show that it takes 21 days to form a habit. Hobbit helps you create these healthy routines by allowing you to set habit goals, track your progress, and then motivating you with streaks. Users are able to register for a Hobbit account, upon login they are able to access thier dashboard where they can add a customised habit, mark as complete for the day/week (depdending on chosen frequency) and see their most recent completion streaks.
 
 ### Installation
@@ -13,12 +15,12 @@ Studies show that it takes 21 days to form a habit. Hobbit helps you create thes
 -   Navigate to the root directory of this repository
 -   Ensure docker desktop app is running
 -   In your terminal run `bash _scripts/startDev.sh` to start the client, apit and database containers
-    -   Access: client on localhost:8080/ and server on localhost:3000/     
+    -   Access: client on localhost:8080/ and server on localhost:3000/
 -   Run `bash _scripts/startTest.sh` to start up the api and database tests
 -   Run `bash _scripts/stop.sh` to close the containers
 -   Run `bash _scripts/teardown.sh` to teardown the containers completely and remove all artifacts
 
-***Do not run both dev and test environments at the same time.***
+**_Do not run both dev and test environments at the same time._**
 
 ## Technologies
 
@@ -69,4 +71,5 @@ Studies show that it takes 21 days to form a habit. Hobbit helps you create thes
 -   MIT
 
 ## Collaborators
+
 [@HeyAero](https://github.com/HeyAero), [@roselynle](https://github.com/roselynle), [@emmanuel-sobamowo](https://github.com/emmanuel-sobamowo), [ravil-96](https://github.com/ravil-96), [FaisalY12](https://github.com/FaisalY12)
