@@ -158,7 +158,7 @@ async function updateHabitClient(e) {
             method: 'PATCH',
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-        const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+        const response = await fetch(`${API_URL}/habits/${habit_id}`, options);
         const data = await response.json();
         console.log(data);
         if (data.err){ throw Error(data.err) }
