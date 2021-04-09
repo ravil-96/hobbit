@@ -1,18 +1,9 @@
-const { getAllHabbits } = require("./requests");
+const API_URL = require('./url');
 
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
-  const testData = [{
-    id: 1,
-    name: "Water Break",
-    habit_desc: "Take a water break",
-    frequency: "daily",
-    streak_track: 4,
-    streak_start: "test",
-    streak_end: "test",
-    user_id: 1
-  }]
+
 
   const allHabits = (habitData) => {
     let format_c_date;
@@ -66,7 +57,8 @@ async function renderHabits(data) {
     } else {
       checkBox.disabled = false;
     }
-
+    console.log(updateHabitClient);
+    console.log(checkBox);
     checkBox.addEventListener('change', updateHabitClient)
 
     habit.appendChild(name);
@@ -78,45 +70,39 @@ async function renderHabits(data) {
     habit.appendChild(checkBoxLabel);
     habit.appendChild(checkBox);
 
-    habits.appendChild(habit);
+    feed.prepend(habit);
   }
 
   data.forEach(allHabits);
-  feed.appendChild(habits);
 }
 
 async function updateHabitClient(e) {
-  e.target.disable = true;
-  const habit_id = e.target.parentElement.id;
-  console.log(e);
-  try {
-      console.log(habit_id);
-      const options = {
-          method: 'PATCH',
-          headers: new Headers({'Authorization': localStorage.getItem('token')}),
-      }
-      const response = await fetch(`${API_URL}/habits/${habit_id}`, options);
-      const data = await response.json();
-      console.log(data);
-      if (data.err){ throw Error(data.err) }
-      updateStreak(data);
-  } catch (err) {
-      console.warn(err);
-  }
+    e.target.disable = true;
+    const habit_id = e.target.parentElement.id;
+    try {
+        const options = {
+            method: 'PATCH',
+            headers: new Headers({'Authorization': localStorage.getItem('token')}),
+        }
+        const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+        const data = await response.json();
+        console.log(data);
+        if (data.err){ throw Error(data.err) }
+        updateStreak(data);
+    } catch (err) {
+        console.warn(err);
+    }
 }
 
 async function updateStreak(data) {
-  console.log(data);
   let id = localStorage.getItem('id')
   let count = data.streak_track;
-  console.log('Test')
-  console.log(data.streak_track);
-  console.log(data.id);
   let checkedBox = document.getElementById(`complete-${data.id}`);
   checkedBox.disabled = true;
   let theCounter = document.getElementById(`count-${data.id}`)
   theCounter.textContent = count;
 }
+
 
 function formatDate(date) {
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -128,4 +114,4 @@ function formatDate(date) {
   return format_date;
 }
 
-module.exports = {renderHabits};
+module.exports = {renderHabits, updateStreak};

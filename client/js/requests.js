@@ -1,4 +1,4 @@
-const { renderHabits } = require('./habits');
+const { renderHabits,  updateStreak } = require('./habits');
 const API_URL = require('./url');
 
 async function postHabit(e){
@@ -22,17 +22,15 @@ async function postHabit(e){
 }
 
 
-
 async function getAllHabbits(){
     try {
         let id = localStorage.getItem('id')
-        console.log(id);
         const options = {
+            method: 'GET',
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
         const response = await fetch(`${API_URL}/habits/${id}`, options);
         const data = await response.json();
-        console.log(data);
         if (data.err){ throw Error(data.err) }
         renderHabits(data);
     } catch (err) {
