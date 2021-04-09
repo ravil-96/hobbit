@@ -48,7 +48,7 @@ Hobbit helps you create healthy routines by helping you set habit goals, track y
 
 ## Bugs
 
--   Sign out button not fixed to the top of habits page
+-   Sign out button not fixed to the top of habits page (on mobile view)
 
 ## Future Features
 
