@@ -75,6 +75,7 @@ function currentUser(){
 module.exports = {requestLogin, requestRegistration, logout}
 },{"./requests":6,"./url":7,"jwt-decode":8}],2:[function(require,module,exports){
 const { getAllHabbits } = require("./requests");
+const API_URL = require('./url');
 
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
@@ -154,7 +155,7 @@ async function renderHabits(data) {
     habit.appendChild(checkBoxLabel);
     habit.appendChild(checkBox);
 
-    habits.appendChild(habit);
+    habits.prepend(habit);
   }
 
   data.forEach(allHabits);
@@ -205,7 +206,7 @@ function formatDate(date) {
 }
 
 module.exports = {renderHabits};
-},{"./requests":6}],3:[function(require,module,exports){
+},{"./requests":6,"./url":7}],3:[function(require,module,exports){
 const { requestLogin, requestRegistration, logout } = require('./auth')
 const { postHabit } = require('./requests');
 
@@ -235,7 +236,7 @@ $('#password, #confirm_password').on('keyup', function () {
       $('#message').html('NOT MATCHING').css('color', 'red');
   });
 
-
+  
 },{}],6:[function(require,module,exports){
 const { renderHabits } = require('./habits');
 const API_URL = require('./url');
@@ -282,7 +283,7 @@ async function getAllHabbits(){
 module.exports = { getAllHabbits, postHabit }
 },{"./habits":2,"./url":7}],7:[function(require,module,exports){
 module.exports = 'https://hobbit-api.herokuapp.com'
-//module.exports = 'http://localhost:3000'
+// module.exports = 'http://localhost:3000'
 },{}],8:[function(require,module,exports){
 "use strict";function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";const a=o;a.default=o,a.InvalidTokenError=n,module.exports=a;
 
