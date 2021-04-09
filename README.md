@@ -1,6 +1,6 @@
 # Hobbit
 
-Hobbit helps you create healthy routines by helping you set habit goals, track your progress, and then motivating you with streaks.
+Studies show that it takes 21 days to form a habit. Hobbit helps you create these healthy routines by allowing you to set habit goals, track your progress, and then motivating you with streaks. Users are able to register for a Hobbit account, upon login they are able to access thier dashboard where they can add a customised habit, mark as complete for the day/week (depdending on chosen frequency) and see their most recent completion streaks.
 
 ### Installation
 
@@ -28,8 +28,8 @@ Hobbit helps you create healthy routines by helping you set habit goals, track y
 -   Discussed the plan for our app using the MoSCoW method
 -   Used the GitHub project board to split up the required tasks
 -   Designed the basic layout of the webapge on Figma
--   
--
+-   Set up the file structure and configured the docker containers and script files
+
 
 ## Wins & Challenges
 
@@ -39,7 +39,7 @@ Hobbit helps you create healthy routines by helping you set habit goals, track y
 -   Users are able to register for an account and login
 -   Password matching function which allows user to see if their password field matches with confirmed password field when registering for an account
 -   Core functionalities achieved: users able to specify any habit they want to track and choose the frequency, habits can be marked as completed, users can see their streak count
--   Client sucessfully deployed on Netlify and server on Heroku
+-   Client deployed on Netlify and server on Heroku. In addition there is sucessful communication between client and server
 
 ### Challenges
 
