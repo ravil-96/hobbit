@@ -95,6 +95,10 @@
         margin-left: 17rem;
         margin-bottom: 2rem;
     }
+    #sign-out {
+        position: fixed;
+        margin:0;
+    }
 }
 
 /* IPAD  */
@@ -178,6 +182,11 @@
         margin-left: 9rem;
         margin-bottom: 2rem;
     }
+
+    #sign-out {
+        position: fixed;
+        margin:0;
+    }
 }
 
 /* IPhone 6/7/8 plus (and other bigger screens - e.g. iphone12) */
@@ -246,11 +255,11 @@
     }
     #name {
         font-size: 1rem;
-        height:1.8rem;
+        height: 1.8rem;
     }
     #desc {
         font-size: 1rem;
-        height:1.8rem;
+        height: 1.8rem;
     }
     #submitbtn {
         display: inline-block;
@@ -270,6 +279,11 @@
         width: 10rem;
         margin-left: 5rem;
         margin-bottom: 2rem;
+    }
+
+    #sign-out {
+        position: fixed;
+        margin: 0;
     }
 }
 
@@ -359,6 +373,11 @@
         border-radius: 30px;
         box-shadow: 0 9px #999;
         width: 10rem;
-        margin-left: 4.2rem;
+        margin-left: 3.8rem;
+    }
+
+    #sign-out {
+        position: fixed;
+        margin:0;
     }
 }
