@@ -38,22 +38,4 @@ async function getAllHabbits(){
     }
 }
 
-async function updateHabitClient(e) {
-    e.target.disable = true;
-    const habit_id = e.target.parentElement.id;
-    try {
-        const options = {
-            method: 'PATCH',
-            headers: new Headers({'Authorization': localStorage.getItem('token')}),
-        }
-        const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
-        const data = await response.json();
-        console.log(data);
-        if (data.err){ throw Error(data.err) }
-        updateStreak(data);
-    } catch (err) {
-        console.warn(err);
-    }
-  }
-
-module.exports = { getAllHabbits, postHabit, updateHabitClient }
+module.exports = { getAllHabbits, postHabit }
