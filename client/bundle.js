@@ -15,7 +15,6 @@ async function requestLogin(e){
             body: JSON.stringify(Object.fromEntries(formData))
         }
 
-        console.log(options.body);
         const r = await fetch(`${API_URL}/auth/login`, options)
         const data = await r.json()
         if (!data.success) { throw new Error('Login not authorised'); }
@@ -26,7 +25,6 @@ async function requestLogin(e){
 }
 
 async function requestRegistration(e) {
-    console.log('Test');
     e.preventDefault();
     try {
         let formData = new FormData(e.target)
@@ -35,7 +33,6 @@ async function requestRegistration(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
         }
-        console.log(options.body);
         const r = await fetch(`${API_URL}/auth/register`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
@@ -72,23 +69,15 @@ function currentUser(){
     return username;
 }
 
-module.exports = {requestLogin, requestRegistration, logout}
+module.exports = {requestLogin, requestRegistration, logout, currentUser, login}
+
 },{"./requests":6,"./url":7,"jwt-decode":8}],2:[function(require,module,exports){
-const { getAllHabbits } = require("./requests");
+const API_URL = require('./url');
 
 async function renderHabits(data) {
   const feed = document.getElementById('habbit-list');
   const habits = document.createElement('div');
-  const testData = [{
-    id: 1,
-    name: "Water Break",
-    habit_desc: "Take a water break",
-    frequency: "daily",
-    streak_track: 4,
-    streak_start: "test",
-    streak_end: "test",
-    user_id: 1
-  }]
+
 
   const allHabits = (habitData) => {
     let format_c_date;
@@ -142,7 +131,8 @@ async function renderHabits(data) {
     } else {
       checkBox.disabled = false;
     }
-
+    console.log(updateHabitClient);
+    console.log(checkBox);
     checkBox.addEventListener('change', updateHabitClient)
 
     habit.appendChild(name);
@@ -154,45 +144,39 @@ async function renderHabits(data) {
     habit.appendChild(checkBoxLabel);
     habit.appendChild(checkBox);
 
-    habits.appendChild(habit);
+    feed.prepend(habit);
   }
 
   data.forEach(allHabits);
-  feed.appendChild(habits);
 }
 
 async function updateHabitClient(e) {
-  e.target.disable = true;
-  const habit_id = e.target.parentElement.id;
-  console.log(e);
-  try {
-      console.log(habit_id);
-      const options = {
-          method: 'PATCH',
-          headers: new Headers({'Authorization': localStorage.getItem('token')}),
-      }
-      const response = await fetch(`${API_URL}/habits/${habit_id}`, options);
-      const data = await response.json();
-      console.log(data);
-      if (data.err){ throw Error(data.err) }
-      updateStreak(data);
-  } catch (err) {
-      console.warn(err);
-  }
+    e.target.disable = true;
+    const habit_id = e.target.parentElement.id;
+    try {
+        const options = {
+            method: 'PATCH',
+            headers: new Headers({'Authorization': localStorage.getItem('token')}),
+        }
+        const response = await fetch(`http://localhost:3000/habits/${habit_id}`, options);
+        const data = await response.json();
+        console.log(data);
+        if (data.err){ throw Error(data.err) }
+        updateStreak(data);
+    } catch (err) {
+        console.warn(err);
+    }
 }
 
 async function updateStreak(data) {
-  console.log(data);
   let id = localStorage.getItem('id')
   let count = data.streak_track;
-  console.log('Test')
-  console.log(data.streak_track);
-  console.log(data.id);
   let checkedBox = document.getElementById(`complete-${data.id}`);
   checkedBox.disabled = true;
   let theCounter = document.getElementById(`count-${data.id}`)
   theCounter.textContent = count;
 }
+
 
 function formatDate(date) {
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -204,8 +188,9 @@ function formatDate(date) {
   return format_date;
 }
 
-module.exports = {renderHabits};
-},{"./requests":6}],3:[function(require,module,exports){
+module.exports = {renderHabits, updateStreak};
+
+},{"./url":7}],3:[function(require,module,exports){
 const { requestLogin, requestRegistration, logout } = require('./auth')
 const { postHabit } = require('./requests');
 
@@ -227,7 +212,8 @@ require('./habits');
 require('./handlers');
 require('./login');
 require('./requests');
-},{"./auth":1,"./habits":2,"./handlers":3,"./login":5,"./requests":6}],5:[function(require,module,exports){
+require('./url');
+},{"./auth":1,"./habits":2,"./handlers":3,"./login":5,"./requests":6,"./url":7}],5:[function(require,module,exports){
 $('#password, #confirm_password').on('keyup', function () {
     if ($('#password').val() == $('#confirm_password').val()) {
       $('#message').html('MATCHING').css('color', 'green');
@@ -235,9 +221,9 @@ $('#password, #confirm_password').on('keyup', function () {
       $('#message').html('NOT MATCHING').css('color', 'red');
   });
 
-
+  
 },{}],6:[function(require,module,exports){
-const { renderHabits } = require('./habits');
+const { renderHabits,  updateStreak } = require('./habits');
 const API_URL = require('./url');
 
 async function postHabit(e){
@@ -261,17 +247,15 @@ async function postHabit(e){
 }
 
 
-
 async function getAllHabbits(){
     try {
         let id = localStorage.getItem('id')
-        console.log(id);
         const options = {
+            method: 'GET',
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
         const response = await fetch(`${API_URL}/habits/${id}`, options);
         const data = await response.json();
-        console.log(data);
         if (data.err){ throw Error(data.err) }
         renderHabits(data);
     } catch (err) {
@@ -282,7 +266,8 @@ async function getAllHabbits(){
 module.exports = { getAllHabbits, postHabit }
 },{"./habits":2,"./url":7}],7:[function(require,module,exports){
 module.exports = 'https://hobbit-api.herokuapp.com'
-//module.exports = 'http://localhost:3000'
+// module.exports = 'http://localhost:3000'
+
 },{}],8:[function(require,module,exports){
 "use strict";function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";const a=o;a.default=o,a.InvalidTokenError=n,module.exports=a;
 
