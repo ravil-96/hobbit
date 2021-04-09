@@ -32,10 +32,12 @@ Studies show that it takes 21 days to form a habit. Hobbit helps you create thes
 ## Process
 
 -   Discussed the plan for our app using the MoSCoW method
--   Used the GitHub project board to split up the required tasks
+-   Used the GitHub project board to split up the required tasks and assign to team members
 -   Designed the basic layout of the webapge on Figma
--   Set up the file structure and configured the docker containers and script files
--   Initialised and seeded into the PostgreSQL database
+-   Set up the file structure, initialised database and configured the docker containers/script files
+-   Implemented basic CRUD functionality which involved querying the database (although delete function not used in the end due to time limitations)
+-   Tested the funtionalities of the app (client and server side) and debugged any issues we came across
+-   Added styling to improve user interface of the app
 
 ## Wins & Challenges
 
