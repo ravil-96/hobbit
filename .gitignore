@@ -1,3 +1,6 @@
 .DS_Store
 api/node_modules
 client/node_modules
+client/coverage
+api/.env
+node_modules
